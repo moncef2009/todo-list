@@ -24,5 +24,21 @@ const register = asyncHandler(async (req, res) => {
     }
 })
 
+const login = asyncHandler(async (req, res) => {
+    try {
+        const email = req.body.email
+        const user = await User.findOne({ email })
+        const token = genToken(user._id)
 
-module.exports = { register }
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: maxAge * 1000
+        })
+            .status(200).json({ user })
+    } catch (error) {
+        res.status(500).json({ 'error': error.message })
+    }
+})
+
+
+module.exports = { register, login }

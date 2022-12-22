@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
+const taskRoutes = require('./routes/taskRoutes')
 
 
 const app = express()
@@ -17,11 +18,13 @@ connectDB()
 
 //Middlewares
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 
 //Routes
 app.use('/api/users', userRoutes)
+app.use('/api/tasks', taskRoutes)
 
 
 
