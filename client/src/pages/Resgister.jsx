@@ -2,7 +2,7 @@ import { Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../features/auth/authSlice";
@@ -14,9 +14,9 @@ function Resgister() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isLoading, isSuccess, isError, message } = useSelector((state) => {
-    state.auth;
-  });
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
   useEffect(() => {
     if (isError) {
       toast.error(message);

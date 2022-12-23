@@ -15,7 +15,6 @@ const register = asyncHandler(async (req, res) => {
         const token = genToken(user._id)
 
         res.cookie('jwt', token, {
-            httpOnly: true,
             maxAge: maxAge * 1000
         })
             .status(201).json({ user })
@@ -31,7 +30,6 @@ const login = asyncHandler(async (req, res) => {
         const token = genToken(user._id)
 
         res.cookie('jwt', token, {
-            httpOnly: true,
             maxAge: maxAge * 1000
         })
             .status(200).json({ user })
@@ -40,5 +38,13 @@ const login = asyncHandler(async (req, res) => {
     }
 })
 
+const logout = asyncHandler(async (req, res) => {
+    try {
+        res.clearCookie('jwt').send('ok')
+    } catch (error) {
+        res.json({ 'error': error.message })
+    }
+})
 
-module.exports = { register, login }
+
+module.exports = { register, login, logout }
