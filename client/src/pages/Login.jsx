@@ -6,7 +6,7 @@ import { FaSignInAlt, FaUser } from "react-icons/fa";
 function Login() {
   const [email, setEmail] = useState("");
   const onChange = (e) => {
-    setEmail(...email, e.target.value);
+    setEmail(e.target.value);
   };
 
   const onSubmit = (e) => {

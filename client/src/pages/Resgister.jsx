@@ -1,17 +1,50 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../features/auth/authSlice";
 
 function Resgister() {
-  const [email, setEmail] = useState("");
+  const [emaill, setEmail] = useState({ email: "" });
+  const { email } = emaill;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isLoading, isSuccess, isError, message } = useSelector((state) => {
+    state.auth;
+  });
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [isSuccess, isError, message, navigate, dispatch]);
   const onChange = (e) => {
-    setEmail(...email, e.target.value);
+    setEmail((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const userData = {
+      email,
+    };
+    dispatch(register(userData));
   };
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
   return (
     <>
       <Box
