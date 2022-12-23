@@ -9,6 +9,7 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: '',
+    cookie: ''
 }
 
 // Register user
@@ -34,6 +35,7 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
     await authService.logout()
+
 })
 
 export const authSlice = createSlice({

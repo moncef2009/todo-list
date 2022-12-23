@@ -12,6 +12,7 @@ const register = async (userData) => {
 //Logout user
 const logout = async () => {
     await axios.get(API_URL + 'logout')
+
 }
 const authService = {
     register, logout
