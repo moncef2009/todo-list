@@ -9,12 +9,20 @@ const taskSchema = mongoose.Schema(
         },
         title: {
             type: String,
-            required: [true, 'enter un titre stp'],
+            required: true
+        },
+        description: {
+            type: String,
+        },
+        createdAt: {
+            type: Date,
+            required: true
+        },
+        deadline: {
+            type: Date,
         }
     },
-    {
-        timestamps: true
-    }
+
 )
 
 module.exports = mongoose.model('Task', taskSchema)

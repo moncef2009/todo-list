@@ -1,20 +1,27 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
 import { Box, AppBar, Toolbar, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [logedout, setLogedout] = useState(false);
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
   };
 
-  const { logedout } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (document.cookie == "") {
+      setLogedout(false);
+    } else {
+      setLogedout(true);
+    }
+  }, [document.cookie]);
 
   return (
     <>

@@ -60,7 +60,7 @@ function Login() {
       >
         <Box>
           <Typography variant="h1" component="h1">
-            <FaUser /> Login
+            <FaUser /> Register
           </Typography>
           <Typography variant="h5" component="p">
             please enter your email
