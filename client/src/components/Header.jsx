@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 
-function Header() {
+function Header(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [logedout, setLogedout] = useState(false);
@@ -13,12 +13,11 @@ function Header() {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
+    setLogedout(false);
   };
 
   useEffect(() => {
-    if (document.cookie == "") {
-      setLogedout(false);
-    } else {
+    if (document.cookie !== "") {
       setLogedout(true);
     }
   }, [document.cookie]);

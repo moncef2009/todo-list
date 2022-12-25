@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 
@@ -60,7 +60,7 @@ function Login() {
       >
         <Box>
           <Typography variant="h1" component="h1">
-            <FaUser /> Register
+            <FaUser /> Login
           </Typography>
           <Typography variant="h5" component="p">
             please enter your email
@@ -94,6 +94,13 @@ function Login() {
               Submit
             </Button>
           </form>
+
+          <Typography variant="body1" component="p">
+            if you don have an acount click heare to{" "}
+            <Button color="inherit" LinkComponent={Link} to="/register">
+              Register
+            </Button>
+          </Typography>
         </Box>
       </Box>
     </>
