@@ -12,7 +12,7 @@ function Header(props) {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate("/");
+    navigate("/login");
     setLogedout(false);
   };
 

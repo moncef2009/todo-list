@@ -14,19 +14,14 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { isLoading, isSuccess, message } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
     if (isSuccess) {
       navigate("/");
     }
 
     dispatch(reset());
-  }, [isSuccess, isError, message, navigate, dispatch]);
+  }, [isSuccess, message, navigate, dispatch]);
   const onChange = (e) => {
     setEmail((prevState) => ({
       ...prevState,

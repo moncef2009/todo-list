@@ -21,6 +21,12 @@ const taskSchema = mongoose.Schema(
         deadline: {
             type: Date,
         }
+        ,
+        complet: {
+            type: Boolean,
+            default: false
+
+        }
     },
 
 )

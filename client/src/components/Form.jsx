@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createTask } from "../features/task/taskSlice";
+import { useNavigate } from "react-router-dom";
 
 function MyForm() {
   const [todo, setTodo] = useState({
@@ -11,6 +13,7 @@ function MyForm() {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setTodo((prevState) => ({
@@ -21,11 +24,14 @@ function MyForm() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    dispatch(createTask(todo));
+
     setTodo({
       title: "",
       description: "",
       deadline: "",
     });
+    navigate("/");
   };
   return (
     <Box

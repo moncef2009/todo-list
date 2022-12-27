@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { register, reset } from "../features/auth/authSlice";
 
 function Resgister() {
@@ -14,19 +13,14 @@ function Resgister() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { isLoading, isSuccess, message } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
     if (isSuccess) {
       navigate("/");
     }
 
     dispatch(reset());
-  }, [isSuccess, isError, message, navigate, dispatch]);
+  }, [isSuccess, message, navigate, dispatch]);
   const onChange = (e) => {
     setEmail((prevState) => ({
       ...prevState,

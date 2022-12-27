@@ -19,7 +19,7 @@ const setTask = asyncHandler(async (req, res) => {
             title: req.body.title,
             description: req.body.description,
             createdAt: Date.now(),
-            deadline: new Date(req.body.deadline)
+            deadline: req.body.deadline
         })
 
         res.status(200).json(task)
@@ -46,9 +46,8 @@ const updateTask = asyncHandler(async (req, res) => {
     }
 
     const updateTask = await Task.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        description: req.body.description,
-        deadline: new Date(req.body.deadline)
+        complet: req.body.complet,
+
     }, { new: true })
 
     res.status(200).json(updateTask)
