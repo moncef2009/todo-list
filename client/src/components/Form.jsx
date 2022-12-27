@@ -10,6 +10,7 @@ function MyForm() {
     title: "",
     description: "",
     deadline: "",
+    complet: false,
   });
 
   const dispatch = useDispatch();

@@ -28,10 +28,46 @@ export const createTask = createAsyncThunk('task/create'
     }
 )
 
+// get tasks
 export const getTasks = createAsyncThunk('task/get'
     , async (_, thunkAPI) => {
         try {
             return await taskService.getTask()
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+// delet task
+export const deletTask = createAsyncThunk('task/delet'
+    , async (taskData, thunkAPI) => {
+        try {
+            return await taskService.deletTask(taskData)
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+// updat task
+export const updateTask = createAsyncThunk('task/delet'
+    , async (taskData, thunkAPI) => {
+        try {
+            console.log(taskData);
+            return await taskService.updateTask(taskData)
         } catch (error) {
             const message =
                 (error.response &&
@@ -82,6 +118,22 @@ export const taskSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+            .addCase(deletTask.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deletTask.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.tasks = state.tasks.filter((task) => task._id !==
+                    action.payload.id)
+
+            })
+            .addCase(deletTask.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+
     }
 })
 

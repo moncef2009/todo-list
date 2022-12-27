@@ -15,8 +15,19 @@ const getTask = async () => {
     return response.data
 }
 
+const deletTask = async (id) => {
+    const response = await axios.delete(API_URL + id)
+    return response.data
+
+}
+
+const updateTask = async (Data) => {
+
+    const response = await axios.put(API_URL + Data.id, Data.val)
+    return response.data
+}
 const taskService = {
-    createTask, getTask
+    createTask, getTask, deletTask, updateTask
 }
 
 export default taskService
