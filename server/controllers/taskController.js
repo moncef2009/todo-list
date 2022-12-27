@@ -31,7 +31,7 @@ const setTask = asyncHandler(async (req, res) => {
 
 const updateTask = asyncHandler(async (req, res) => {
     const task = await Task.findById(req.params.id)
-
+    console.log(req.body);
     if (!task) {
         res.status(404).json({ message: 'pas de tache pour cette Id' })
     }
@@ -47,6 +47,7 @@ const updateTask = asyncHandler(async (req, res) => {
 
     await Task.findByIdAndUpdate(req.params.id, {
         complet: req.body.complet,
+        deadline: req.body.deadline
     }, { new: true })
 
     const tasks = await Task.find({ user: req.user.id })
