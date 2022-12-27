@@ -63,7 +63,7 @@ export const deletTask = createAsyncThunk('task/delet'
 )
 
 // updat task
-export const updateTask = createAsyncThunk('task/delet'
+export const updateTask = createAsyncThunk('task/update'
     , async (taskData, thunkAPI) => {
         try {
             console.log(taskData);
@@ -129,6 +129,20 @@ export const taskSlice = createSlice({
 
             })
             .addCase(deletTask.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(updateTask.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updateTask.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.tasks = action.payload
+
+            })
+            .addCase(updateTask.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
