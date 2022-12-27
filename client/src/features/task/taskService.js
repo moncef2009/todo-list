@@ -22,8 +22,8 @@ const deletTask = async (id) => {
 }
 
 const updateTask = async (Data) => {
-
-    const response = await axios.put(API_URL + Data.id, Data.val)
+    console.log(Data[1]);
+    const response = await axios.put(API_URL + Data[0], Data[1])
     return response.data
 }
 const taskService = {

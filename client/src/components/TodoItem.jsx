@@ -1,5 +1,6 @@
 import { TableCell, TableRow, Checkbox } from "@mui/material";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useDispatch } from "react-redux";
@@ -9,6 +10,12 @@ function TodoItem({ task }) {
   const [val, setVal] = useState({
     complet: task.complet,
   });
+
+  const handleChanche = () => {
+    setVal(!val.complet);
+    dispatch(updateTask([id, val]));
+  };
+
   const dispatch = useDispatch();
   const date = new Date(task.deadline);
   const d =
@@ -33,15 +40,7 @@ function TodoItem({ task }) {
       <TableCell align="right">{task.description}</TableCell>
       <TableCell align="right">{d}</TableCell>
       <TableCell align="right">
-        <Checkbox
-          onClick={() => {
-            setVal({
-              complet: !val.complet,
-            });
-
-            dispatch(updateTask({ id, val }));
-          }}
-        />
+        <Checkbox onChange={handleChanche} />
       </TableCell>
       <TableCell align="right">
         <TiDeleteOutline
