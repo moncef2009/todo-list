@@ -139,8 +139,7 @@ export const taskSlice = createSlice({
             .addCase(updateTask.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.tasks = action.payload
-
+                state.tasks = state.tasks.map(task => task._id == action.payload._id ? action.payload : task)
             })
             .addCase(updateTask.rejected, (state, action) => {
                 state.isLoading = false

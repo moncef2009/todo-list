@@ -45,14 +45,14 @@ const updateTask = asyncHandler(async (req, res) => {
         res.status(401).json({ message: 'User not authorized' })
     }
 
-    await Task.findByIdAndUpdate(req.params.id, {
+    const updTask = await Task.findByIdAndUpdate(req.params.id, {
         complet: req.body.complet,
         deadline: req.body.deadline
     }, { new: true })
 
-    const tasks = await Task.find({ user: req.user.id })
 
-    res.status(200).json(tasks)
+
+    res.status(200).json(updTask)
 }
 )
 
