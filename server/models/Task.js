@@ -25,7 +25,6 @@ const taskSchema = mongoose.Schema(
         complet: {
             type: Boolean,
             default: false
-
         }
     },
 
